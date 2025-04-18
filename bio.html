@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -75,6 +75,7 @@
       background-color: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: space-around;
+      align-items: center;
       padding: 10px 0;
     }
 
@@ -98,6 +99,18 @@
     footer button:hover {
       color: #007BFF;
     }
+
+    /* 🎯 Estilo especial para o botão do meio */
+    .futebol-btn i {
+      font-size: 28px;
+      color: #FFD700;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
   </style>
 </head>
 <body>
@@ -110,9 +123,18 @@
   </div>
 
   <footer>
-    <button><i class="fas fa-home"></i> Início</button>
-    <button><i class="https://play177.github.io/ver/"></i> Palpites</button>
-    <button><i class="fas fa-cog"></i> Config</button>
+    <button onclick="location.href='index.html'">
+      <i class="fas fa-home"></i>
+      Início
+    </button>
+    <button class="futebol-btn" onclick="location.href='https://play177.github.io/ver/'">
+      <i class="fas fa-futbol"></i>
+      Palpites
+    </button>
+    <button onclick="location.href='#'">
+      <i class="fas fa-cog"></i>
+      Config
+    </button>
   </footer>
 </body>
 </html>
