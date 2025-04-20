@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meu Hub de Apostas</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -75,27 +76,30 @@
       background-color: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: space-around;
+      align-items: center;
       padding: 10px 0;
     }
 
-    footer button {
+    footer a {
       background-color: transparent;
       color: #fff;
       font-size: 12px;
-      border: none;
+      text-align: center;
+      text-decoration: none;
       cursor: pointer;
       transition: color 0.3s;
       display: flex;
       flex-direction: column;
       align-items: center;
+      border: none;
     }
 
-    footer button i {
+    footer a i {
       font-size: 18px;
       margin-bottom: 5px;
     }
 
-    footer button:hover {
+    footer a:hover {
       color: #007BFF;
     }
 
@@ -113,6 +117,19 @@
       background-color: #D32F2F;
       color: #fff;
     }
+
+    .bola-rebote {
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -125,9 +142,18 @@
   </div>
 
   <footer>
-    <button><i class="fas fa-home"></i> Início</button>
-    <button class="botao-principal"><i class="fas fa-bolt"></i> Pronósticos</button>
-    <button><i class="fas fa-cog"></i> Config</button>
+    <a href="index.html">
+      <i class="fas fa-home"></i>
+      Início
+    </a>
+    <a href="1.html" class="botao-principal">
+      <i class="fas fa-futbol bola-rebote"></i>
+      Pronósticos
+    </a>
+    <a href="config.html">
+      <i class="fas fa-cog"></i>
+      Config
+    </a>
   </footer>
 </body>
 </html>
