@@ -166,31 +166,34 @@
 </head>
 <body>
   <div class="container">
-    <h1>Tu Jugada GANADORA!</h1>
+    <h1>Seu Palpite VENCEDOR</h1>
 
+    <!-- Etapa 1: Botão para gerar palpites -->
     <div id="step-1">
-      <button onclick="generarPronosticos()">Haz clic para generar</button>
+      <button onclick="gerarPalpites()">Clique para gerar</button>
     </div>
 
+    <!-- Etapa 2: Resultados -->
     <div id="step-2" class="step-2">
       <div class="result" id="resultado"></div>
       <div class="buttons-inline">
         <button id="intellibet-btn" onclick="mostrarIntelliBet()">IntelliBet</button>
-        <button onclick="reiniciar()">Generar de nuevo</button>
+        <button onclick="reiniciar()">Gerar novamente</button>
       </div>
     </div>
 
+    <!-- Etapa 3: IntelliBet -->
     <div id="step-3" class="step-3">
-      <h2>Invierte Inteligentemente con IntelliBet</h2>
-      <p><strong>Incrementa tus ganancias con IntelliBet:</strong></p>
-      <p>Descubre pronósticos confiables y estrategias de inversión en 3 pasos para maximizar tu éxito.</p>
+      <h2>Invista Inteligentemente com IntelliBet</h2>
+      <p><strong>Aumente seus lucros com IntelliBet:</strong></p>
+      <p>Descubra palpites confiáveis e estratégias de investimento em 3 passos para maximizar seu sucesso.</p>
       <ol>
-        <li>Accede a nuestro generador exclusivo de pronósticos.</li>
-        <li>Aplica nuestra estrategia de apalancamiento.</li>
-        <li>Multiplica tus resultados.</li>
+        <li>Acesse nosso gerador exclusivo de palpites.</li>
+        <li>Aplique nossa estratégia de alavancagem.</li>
+        <li>Multiplique seus resultados.</li>
       </ol>
-      <p>Con IntelliBet, llevas tus apuestas deportivas a un nivel profesional.</p>
-      <button onclick="enviarWhatsApp()">Comienza ahora</button>
+      <p>Com IntelliBet, você leva suas apostas esportivas a um nível profissional.</p>
+      <button onclick="enviarWhatsApp()">Comece agora</button>
     </div>
   </div>
 
@@ -210,39 +213,39 @@
   </footer>
 
   <script>
-    const pronosticos = [
-        { nombre: "Más de 1.5 Partick Thistle FC x Queens Park", odds: 1.23 },
-        { nombre: "Más de 1.5 Raith Rovers FC x Livingston", odds: 1.24 },
-        { nombre: "Más de 1.5 Alloa Athletic FC x Stenhousemuir", odds: 1.27 },
-        { nombre: "CASA/FUERA Dumbarton FC x Kelty Hearts", odds: 1.22 },
-        { nombre: "Más de 1.5 Inverness Caledonian T. x Cove Rangers", odds: 1.29 },
-        { nombre: "Más de 1.5 Queen of The South FC x Annan Athletics", odds: 1.25 },
-        { nombre: "Más de 1.5 Elgin City FC x Peterhead FC", odds: 1.26 }
+    const palpites = [
+      { nome: "Mais de 1.5 Partick Thistle FC x Queens Park", odds: 1.23 },
+      { nome: "Mais de 1.5 Raith Rovers FC x Livingston", odds: 1.24 },
+      { nome: "Mais de 1.5 Alloa Athletic FC x Stenhousemuir", odds: 1.27 },
+      { nome: "CASA/FORA Dumbarton FC x Kelty Hearts", odds: 1.22 },
+      { nome: "Mais de 1.5 Inverness Caledonian T. x Cove Rangers", odds: 1.29 },
+      { nome: "Mais de 1.5 Queen of The South FC x Annan Athletics", odds: 1.25 },
+      { nome: "Mais de 1.5 Elgin City FC x Peterhead FC", odds: 1.26 }
     ];
-    let seleccionados = [];
+    let selecionados = [];
 
-    function mezclarArray(array) {
+    function embaralharArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; 
+        [array[i], array[j]] = [array[j], array[i]];
       }
     }
 
-    function generarPronosticos() {
+    function gerarPalpites() {
       document.getElementById('step-1').style.display = 'none';
       document.getElementById('step-2').style.display = 'block';
 
       const resultadosDiv = document.getElementById('resultado');
-      mezclarArray(pronosticos);
-      seleccionados = pronosticos.slice(0, 2);
+      embaralharArray(palpites);
+      selecionados = palpites.slice(0, 2);
 
-      const multiplicacionOdds = (seleccionados[0].odds * seleccionados[1].odds).toFixed(2);
+      const multiplicacaoOdds = (selecionados[0].odds * selecionados[1].odds).toFixed(2);
 
       resultadosDiv.innerHTML = `
-        <p><strong>Tus pronósticos son:</strong></p>
-        <p>1. ${seleccionados[0].nombre} (Odds: ${seleccionados[0].odds})</p>
-        <p>2. ${seleccionados[1].nombre} (Odds: ${seleccionados[1].odds})</p>
-        <p><strong>Odds Totales:</strong> ${multiplicacionOdds}</p>
+        <p><strong>Seus palpites são:</strong></p>
+        <p>1. ${selecionados[0].nome} (Odds: ${selecionados[0].odds})</p>
+        <p>2. ${selecionados[1].nome} (Odds: ${selecionados[1].odds})</p>
+        <p><strong>Odds Totais:</strong> ${multiplicacaoOdds}</p>
       `;
     }
 
@@ -252,13 +255,13 @@
     }
 
     function enviarWhatsApp() {
-      const mensaje = `¡Hola! Quiero saber más sobre IntelliBet y cómo invertir con apalancamiento.\n\n` +
-                      `👉 *Pronósticos actuales:*\n` +
-                      `1. ${seleccionados[0].nombre} (Odds: ${seleccionados[0].odds})\n` +
-                      `2. ${seleccionados[1].nombre} (Odds: ${seleccionados[1].odds})\n\n` +
-                      `📊 *Odds Totales:* ${(seleccionados[0].odds * seleccionados[1].odds).toFixed(2)}\n` +
-                      `💰 Estoy interesado en invertir.`;
-      const url = `https://wa.me/5521959192541?text=${encodeURIComponent(mensaje)}`;
+      const mensagem = `Olá! Quero saber mais sobre IntelliBet e como investir com alavancagem.\n\n` +
+        `👉 *Palpites atuais:*\n` +
+        `1. ${selecionados[0].nome} (Odds: ${selecionados[0].odds})\n` +
+        `2. ${selecionados[1].nome} (Odds: ${selecionados[1].odds})\n\n` +
+        `📊 *Odds Totais:* ${(selecionados[0].odds * selecionados[1].odds).toFixed(2)}\n` +
+        `💰 Estou interessado em investir.`;
+      const url = `https://wa.me/5521959192541?text=${encodeURIComponent(mensagem)}`;
       window.open(url, '_blank');
     }
 
