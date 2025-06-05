@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Otavio Melo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      position: relative;
+      height: 220px;
+      background: linear-gradient(180deg, #000 0%, #111 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logo {
+      position: absolute;
+      top: 30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+      z-index: 10;
+    }
+
+    main {
+      padding: 100px 20px 40px;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    p.description {
+      margin: 10px 0 40px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      margin: 30px 0;
+      padding-bottom: 10px;
+    }
+
+    .gallery-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-scroll img {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .links a {
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      background-color: #fff;
+      color: #000;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .links a:hover {
+      background-color: #ddd;
+    }
+
+    .mini-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .mini-gallery img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .whatsapp-float img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-float img:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 480px) {
+      .mini-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+.product-card {
+  flex: 0 0 auto;
+  width: 220px;
+  background-color: #111;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 1rem;
+  margin: 4px 0;
+  color: #fff;
+}
+
+.product-card h4 {
+  font-size: 0.9rem;
+  margin: 2px 0;
+  color: #ccc;
+}
+
+.product-card p {
+  font-size: 0.85rem;
+  margin: 8px 0 12px;
+  color: #aaa;
+}
+
+.play-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.play-btn:hover {
+  background-color: #ddd;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://userfiles.sdwc.me/1b46b08e553b8822851fb.webp" alt="Logo" class="logo" />
+  </header>
+
+  <main>
+    <h1>Otavio Melo</h1>
+    <p class="description">Mostrando todo lo que hago y vendo en un solo lugar.</p>
+
+    <!-- Galería desplazable -->
+  <div class="gallery-scroll">
+
+  
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 2" />
+    <h3>40 PP</h3>
+    <h4>Subtítulo llamativo</h4>
+    <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 3" />
+    <h3>40 PP</h3>
+    <h4>Subtítulo breve</h4>
+    <p>Breve descripción o beneficio del producto o enlace.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/37b5300dd41bdbea97402.webp" alt="Producto 4" />
+    <h3>Producto 4</h3>
+    <h4>Subtítulo opcional</h4>
+    <p>Texto promocional o llamado a la acción para este producto.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+</div>
+
+
+    <!-- Links principales -->
+    <div class="links">
+      <a href="#">🛒 Comprar el Visor de Rangos</a>
+      <a href="#">📚 Accede a mi Curso de Poker</a>
+      <a href="#">📲 Sígueme en Instagram</a>
+    </div>
+
+    <!-- Mini galería -->
+     <div class="gallery-scroll">
+
+  
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/39c4d06d391377c8cac7f.webp" alt="Producto 2" />
+    <h3>40 PP</h3>
+    <h4>Subtítulo llamativo</h4>
+    <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 3" />
+    <h3>40 PP</h3>
+    <h4>Subtítulo breve</h4>
+    <p>Breve descripción o beneficio del producto o enlace.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+
+  <div class="product-card">
+    <img src="https://userfiles.sdwc.me/5142c84984d6f1465d465.webp" alt="Producto 4" />
+    <h3>Producto 4</h3>
+    <h4>Subtítulo opcional</h4>
+    <p>Texto promocional o llamado a la acción para este producto.</p>
+    <a class="play-btn" href="#">Jugar Ahora</a>
+  </div>
+</div>
+
+    <footer>
+      © 2025 Otavio Melo — Todos los derechos reservados.
+    </footer>
+  </main>
+
+  <!-- WhatsApp flotante -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/5491112345678" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
+    </a>
+  </div>
+
+</body>
+</html>
