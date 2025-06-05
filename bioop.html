@@ -219,53 +219,6 @@
   .play-btn:hover {
     background-color: #ddd;
   }
-.gallery-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-/* Sombra lateral */
-.gallery-wrapper::before,
-.gallery-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 40px;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.gallery-wrapper::before {
-  left: 0;
-  background: linear-gradient(to right, #000 0%, transparent 100%);
-}
-
-.gallery-wrapper::after {
-  right: 0;
-  background: linear-gradient(to left, #000 0%, transparent 100%);
-}
-
-/* Flecha indicadora */
-.scroll-hint {
-  position: absolute;
-  right: 10px;
-  bottom: -12px;
-  font-size: 1.5rem;
-  color: #aaa;
-  animation: bounce-right 1.5s infinite;
-  z-index: 3;
-}
-
-@keyframes bounce-right {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-}
-
 </style>
 
 </head>
@@ -279,7 +232,7 @@
 
   <main>
     <h1>Manu BET</h1>
-    <p class="description">Tu PokerAmigo y Cajero de confianza!</p>
+    <p class="description">Mostrando todo lo que hago y vendo en un solo lugar.</p>
 
  
 <div class="gallery-wrapper">
@@ -287,8 +240,7 @@
 
   <!-- Contenedor de productos que se puede ocultar -->
   <div id="galeria1" class="gallery-scroll">
-  
-  <div class="product-card">
+    <div class="product-card">
       <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 1" />
       <h3>40 PP</h3>
       <h4>Subtítulo llamativo</h4>
@@ -304,15 +256,14 @@
       <a class="play-btn" href="#">Jugar Ahora</a>
     </div>
 
-  <div class="product-card">
-      <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 1" />
-      <h3>40 PP</h3>
-      <h4>Subtítulo llamativo</h4>
-      <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+    <div class="product-card">
+      <img src="https://userfiles.sdwc.me/37b5300dd41bdbea97402.webp" alt="Producto 3" />
+      <h3>Producto 4</h3>
+      <h4>Subtítulo opcional</h4>
+      <p>Texto promocional o llamado a la acción para este producto.</p>
       <a class="play-btn" href="#">Jugar Ahora</a>
     </div>
   </div>
-<div class="scroll-hint">➡️</div>
 </div>
 
 
@@ -324,34 +275,38 @@
       <a href="#">📲 Sígueme en Instagram</a>
     </div>
 
-    <!-- Mini galería -->
-     <div class="gallery-scroll">
+<div class="gallery-wrapper">
+  <div class="gallery-toggle" onclick="toggleGallery('galeria1', this)">🌟 Torneos de Domingo</div>
 
-  
-  <div class="product-card">
-    <img src="https://userfiles.sdwc.me/39c4d06d391377c8cac7f.webp" alt="Producto 2" />
-    <h3>40 PP</h3>
-    <h4>Subtítulo llamativo</h4>
-    <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
-  </div>
+  <!-- Contenedor de productos que se puede ocultar -->
+  <div id="galeria1" class="gallery-scroll">
+    <div class="product-card">
+      <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 1" />
+      <h3>40 PP</h3>
+      <h4>Subtítulo llamativo</h4>
+      <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
 
-  <div class="product-card">
-    <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 3" />
-    <h3>40 PP</h3>
-    <h4>Subtítulo breve</h4>
-    <p>Breve descripción o beneficio del producto o enlace.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
-  </div>
+    <div class="product-card">
+      <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 2" />
+      <h3>40 PP</h3>
+      <h4>Subtítulo breve</h4>
+      <p>Breve descripción o beneficio del producto o enlace.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
 
-  <div class="product-card">
-    <img src="https://userfiles.sdwc.me/5142c84984d6f1465d465.webp" alt="Producto 4" />
-    <h3>Producto 4</h3>
-    <h4>Subtítulo opcional</h4>
-    <p>Texto promocional o llamado a la acción para este producto.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
+    <div class="product-card">
+      <img src="https://userfiles.sdwc.me/37b5300dd41bdbea97402.webp" alt="Producto 3" />
+      <h3>Producto 4</h3>
+      <h4>Subtítulo opcional</h4>
+      <p>Texto promocional o llamado a la acción para este producto.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
   </div>
 </div>
+
+
 
     <footer>
       © 2025 Otavio Melo — Todos los derechos reservados.
