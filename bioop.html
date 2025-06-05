@@ -5,231 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Otavio Melo</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
 
-    header {
-      position: relative;
-      height: 220px;
-      background: linear-gradient(180deg, #000 0%, #111 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  header {
+    text-align: center;
+    padding: 10px 10px 0; /* Reducido */
+    position: relative;
+  }
 
-    .logo {
-      position: absolute;
-      top: 30px;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-      z-index: 10;
-    }
+  .logo-container {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 0; /* Reducido */
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: float 4s ease-in-out infinite;
+  }
 
-    main {
-      padding: 100px 20px 40px;
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-    }
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+  }
 
-    h1 {
-      margin: 0;
-      font-size: 1.8rem;
-    }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
 
-    p.description {
-      margin: 10px 0 40px;
-      font-size: 1rem;
-      color: #ccc;
-    }
+  header h1 {
+    font-size: 1.6rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+  }
 
-    .gallery-scroll {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      margin: 30px 0;
-      padding-bottom: 10px;
-    }
+  header p {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 0;
+  }
 
-    .gallery-scroll::-webkit-scrollbar {
-      display: none;
-    }
+  main {
+    padding: 40px 20px 40px; /* Reducido de 100px */
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-    .gallery-scroll img {
-      flex: 0 0 auto;
-      width: 200px;
-      height: 120px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+  p.description {
+    margin: 10px 0 40px;
+    font-size: 1rem;
+    color: #ccc;
+  }
 
-    .links a {
-      text-decoration: none;
-      padding: 14px;
-      border-radius: 8px;
-      background-color: #fff;
-      color: #000;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
+  .gallery-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    margin: 30px 0;
+    padding-bottom: 10px;
+  }
 
-    .links a:hover {
-      background-color: #ddd;
-    }
+  .gallery-scroll::-webkit-scrollbar {
+    display: none;
+  }
 
-    .mini-gallery {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 30px;
-    }
+  .gallery-scroll img {
+    flex: 0 0 auto;
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
 
-    .mini-gallery img {
-      width: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    footer {
-      margin-top: 40px;
-      font-size: 0.8rem;
-      color: #777;
-    }
+  .links a {
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 8px;
+    background-color:  #222;
+    color: white;;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
 
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-    }
+  .links a:hover {
+    background-color: #ddd;
+  }
 
-    .whatsapp-float img {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s ease;
-    }
-
-    .whatsapp-float img:hover {
-      transform: scale(1.1);
-    }
-
-    @media (max-width: 480px) {
-      .mini-gallery {
-        grid-template-columns: 1fr;
-      }
-    }
-.product-card {
-  flex: 0 0 auto;
-  width: 220px;
-  background-color: #111;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: left;
-  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+  .gallery-wrapper {
+  margin-bottom: 2rem;
 }
 
-.product-card img {
-  width: 100%;
-  height: 120px;
+.gallery-toggle {
+  display: inline-block;
+  background-color: #000; /* mismo fondo que los botones */
+  color: white;
+  padding: 14px 24px;
   border-radius: 8px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.product-card h3 {
-  font-size: 1rem;
-  margin: 4px 0;
-  color: #fff;
-}
-
-.product-card h4 {
-  font-size: 0.9rem;
-  margin: 2px 0;
-  color: #ccc;
-}
-
-.product-card p {
-  font-size: 0.85rem;
-  margin: 8px 0 12px;
-  color: #aaa;
-}
-
-.play-btn {
-  display: inline-block;
-  padding: 8px 14px;
-  background-color: #fff;
-  color: #000;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.play-btn:hover {
-  background-color: #ddd;
-}
-header {
   text-align: center;
-  padding: 20px 10px 10px;
-  position: relative;
-}
-
-.logo-container {
-  display: inline-block;
-  width: 140px;
-  height: 140px;
-  margin-bottom: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  animation: float 4s ease-in-out infinite;
-}
-
-.logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 50%;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-header h1 {
-  font-size: 1.6rem;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-header p {
   font-size: 1rem;
-  color: #aaa;
-  margin-bottom: 0;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s;
 }
 
-  </style>
+.gallery-toggle:hover {
+  background-color: #444;
+}
+
+
+  footer {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: #777;
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+  }
+
+  .whatsapp-float img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+  }
+
+  .whatsapp-float img:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 480px) {
+    .mini-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .product-card {
+    flex: 0 0 auto;
+    width: 220px;
+    background-color: #111;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .product-card h3 {
+    font-size: 1rem;
+    margin: 4px 0;
+    color: #fff;
+  }
+
+  .product-card h4 {
+    font-size: 0.9rem;
+    margin: 2px 0;
+    color: #ccc;
+  }
+
+  .product-card p {
+    font-size: 0.85rem;
+    margin: 8px 0 12px;
+    color: #aaa;
+  }
+
+  .play-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .play-btn:hover {
+    background-color: #ddd;
+  }
+.gallery-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sombra lateral */
+.gallery-wrapper::before,
+.gallery-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gallery-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #000 0%, transparent 100%);
+}
+
+.gallery-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #000 0%, transparent 100%);
+}
+
+/* Flecha indicadora */
+.scroll-hint {
+  position: absolute;
+  right: 10px;
+  bottom: -12px;
+  font-size: 1.5rem;
+  color: #aaa;
+  animation: bounce-right 1.5s infinite;
+  z-index: 3;
+}
+
+@keyframes bounce-right {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+</style>
+
 </head>
 <body>
 
@@ -241,36 +279,42 @@ header p {
 
   <main>
     <h1>Manu BET</h1>
-    <p class="description">Mostrando todo lo que hago y vendo en un solo lugar.</p>
+    <p class="description">Tu PokerAmigo y Cajero de confianza!</p>
 
-    <!-- Galería desplazable -->
-  <div class="gallery-scroll">
+ 
+<div class="gallery-wrapper">
+  <div class="gallery-toggle" onclick="toggleGallery('galeria1', this)">🌟 Torneos de Domingo</div>
 
+  <!-- Contenedor de productos que se puede ocultar -->
+  <div id="galeria1" class="gallery-scroll">
   
   <div class="product-card">
-    <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 2" />
-    <h3>40 PP</h3>
-    <h4>Subtítulo llamativo</h4>
-    <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
-  </div>
+      <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 1" />
+      <h3>40 PP</h3>
+      <h4>Subtítulo llamativo</h4>
+      <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
+
+    <div class="product-card">
+      <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 2" />
+      <h3>40 PP</h3>
+      <h4>Subtítulo breve</h4>
+      <p>Breve descripción o beneficio del producto o enlace.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
 
   <div class="product-card">
-    <img src="https://userfiles.sdwc.me/7b5300dd41bdbea97402b.webp" alt="Producto 3" />
-    <h3>40 PP</h3>
-    <h4>Subtítulo breve</h4>
-    <p>Breve descripción o beneficio del producto o enlace.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
+      <img src="https://userfiles.sdwc.me/b5300dd41bdbea97402b9.webp" alt="Producto 1" />
+      <h3>40 PP</h3>
+      <h4>Subtítulo llamativo</h4>
+      <p>Pequeño detalle del producto para llamar la atención del usuario.</p>
+      <a class="play-btn" href="#">Jugar Ahora</a>
+    </div>
   </div>
-
-  <div class="product-card">
-    <img src="https://userfiles.sdwc.me/37b5300dd41bdbea97402.webp" alt="Producto 4" />
-    <h3>Producto 4</h3>
-    <h4>Subtítulo opcional</h4>
-    <p>Texto promocional o llamado a la acción para este producto.</p>
-    <a class="play-btn" href="#">Jugar Ahora</a>
-  </div>
+<div class="scroll-hint">➡️</div>
 </div>
+
 
 
     <!-- Links principales -->
@@ -320,6 +364,21 @@ header p {
       <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp" />
     </a>
   </div>
+<script>
+  function toggleGallery(id, toggleElement) {
+    const galeria = document.getElementById(id);
+    const isVisible = galeria.style.display !== 'none';
+
+    if (isVisible) {
+      galeria.style.display = 'none';
+      toggleElement.innerText = '🌟 Mostrar Torneos de Domingo';
+    } else {
+      galeria.style.display = 'flex'; // vuelve a usar flex porque es una galería scroll
+      toggleElement.innerText = '🌟 Ocultar Torneos de Domingo';
+    }
+  }
+</script>
+
 
 </body>
 </html>
