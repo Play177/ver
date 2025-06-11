@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Desafío | Quintuplica tu Banca</title>
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #121212;
+      --accent: #FFD700;
+      --text-primary: #C0C0C0;
+      --text-secondary: #b0b0b0;
+      --card-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px 15px 90px;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 10px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .bloque {
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .intro-text {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: var(--text-secondary);
+    }
+
+    .etapa-container {
+      display: grid;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .etapa {
+      background-color: var(--bg-secondary);
+      border-left: 4px solid var(--accent);
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s;
+    }
+
+    .etapa:hover {
+      transform: translateX(5px);
+    }
+
+    .etapa:nth-child(1) {
+      border-left-color: #4CAF50;
+    }
+
+    .etapa:nth-child(2) {
+      border-left-color: #2196F3;
+    }
+
+    .etapa:nth-child(3) {
+      border-left-color: #FF5722;
+    }
+
+    .card {
+      background-color: var(--bg-secondary);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      box-shadow: var(--card-shadow);
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .regla {
+      border-left: 4px solid #FF5252;
+    }
+
+    .paso {
+      border-left: 4px solid #4CAF50;
+    }
+
+    .error {
+      border-left: 4px solid #FF5252;
+    }
+
+    .ganancia {
+      border-left: 4px solid #2196F3;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--bg-primary);
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      padding: 12px 0;
+      backdrop-filter: blur(5px);
+    }
+
+    .footer-nav button {
+      background-color: var(--accent);
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .footer-nav button:hover {
+      background-color: #000;
+      color: var(--accent);
+      outline: 2px solid var(--accent);
+      transform: translateY(-2px);
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 30px 20px 100px;
+      }
+      
+      .bloque {
+        padding: 0 20px;
+      }
+      
+      .etapa-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bloque">
+    <h1>🎯 DESAFÍO: QUINTUPLICA TU BANCA</h1>
+    <p class="intro-text">3 Etapas. 1 Mentalidad. 0 Excusas.</p>
+
+    <div class="card">
+      <p>Este no es un reto bancario. Es un viaje de transformación personal.
+      Es para el que entiende que multiplicar su bankroll es la consecuencia de elevar su disciplina, precisión y fortaleza mental.
+      Si estás cansado de grindear sin rumbo... este es tu nuevo norte.</p>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <h2>🔥 Etapas del Desafío</h2>
+    <div class="etapa-container">
+      <div class="etapa">
+        <h3>Etapa 1: El Despertar</h3>
+        <p>De $100 a $200</p>
+      </div>
+      <div class="etapa">
+        <h3>Etapa 2: El Renacimiento</h3>
+        <p>De $200 a $350</p>
+      </div>
+      <div class="etapa">
+        <h3>Etapa 3: El Asalto</h3>
+        <p>De $350 a $500</p>
+      </div>
+    </div>
+
+    <div class="card regla">
+      <strong>📌 Regla clave:</strong> Si pierdes el 20% de la banca en una etapa, retrocedes a la anterior.
+    </div>
+  </div>
+
+  <div class="bloque">
+    <h2>📝 La Metodología</h2>
+    
+    <div class="card paso">
+      <h3>🃏 Paso 1: Elige Tu Modalidad</h3>
+      <ul>
+        <li>CashGame NLH</li>
+        <li>MTT</li>
+        <li>SpinUp</li>
+        <li>SNG</li>
+      </ul>
+    </div>
+
+    <div class="card paso">
+      <h3>📚 Paso 2: Estudio 1:1</h3>
+      <ul>
+        <li>1h de Grind = 1h de Estudio</li>
+        <li>Análisis de manos (50%)</li>
+        <li>Videos/Streams de pros (20%)</li>
+        <li>Teoría avanzada (30%)</li>
+      </ul>
+    </div>
+
+    <div class="card paso">
+      <h3>⏰ Paso 3: Rutina de un Grinder Real</h3>
+      <p><strong>🌄 Pre-Grind:</strong> Respiración, objetivo claro</p>
+      <p><strong>🔥 Grind:</strong> Teléfono off, ritmo constante, descanso cada hora</p>
+      <p><strong>🌙 Post-Grind:</strong> Revisión, ajuste diario, evaluar emociones</p>
+    </div>
+  </div>
+
+  <div class="bloque">
+    <div class="card error">
+      <h3>❌ Errores que revientan sueños</h3>
+      <ul>
+        <li>Tilt emocional</li>
+        <li>Volumen insuficiente</li>
+        <li>Falta de feedback</li>
+        <li>Ego desmedido</li>
+      </ul>
+    </div>
+
+    <div class="card ganancia">
+      <h3>🚀 ¿Qué ganás realmente?</h3>
+      <ul>
+        <li>✨ Un sistema</li>
+        <li>✨ Control emocional</li>
+        <li>✨ Visión estratégica</li>
+        <li>✨ Identidad de jugador de poker</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>🔓 Bienvenido al Desafío de los que no se conforman.</p>
+    <p><strong>QUINTUPLICA TU BANCA — Y QUINTUPLICA TU MENTALIDAD.</strong></p>
+  </div>
+
+  <div class="footer-nav">
+    <a href="bio.html">
+      <button>Inicio</button>
+    </a>
+    <a href="mtt2.html">
+      <button>Visor</button>
+    </a>
+    <a href="bonos.html">
+      <button>Bonos</button>
+    </a>
+  </div>
+
+</body>
+</html>
