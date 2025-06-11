@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción al Desafío de Poker</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #121212;
+            --accent: #FFD700;
+            --text-primary: #C0C0C0;
+            --text-secondary: #b0b0b0;
+            --card-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px 15px 90px;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .form-step {
+            background-color: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], 
+        select, 
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus, 
+        select:focus, 
+        textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background-color: #333;
+            color: var(--text-primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #333;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-step.active {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .progress-step.completed {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #333;
+            z-index: 1;
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            background-color: var(--accent);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--bg-primary);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 12px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .footer-nav button {
+            background-color: var(--accent);
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .footer-nav button:hover {
+            background-color: #000;
+            color: var(--accent);
+            outline: 2px solid var(--accent);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🎯 Inscripción al Desafío</h1>
+        <p class="intro-text">Completa estos pasos para unirte al desafío de quintuplicar tu banca</p>
+        
+        <div class="progress-bar">
+            <div class="progress-step active" id="step1-indicator">1</div>
+            <div class="progress-step" id="step2-indicator">2</div>
+            <div class="progress-step" id="step3-indicator">3</div>
+            <div class="progress-line">
+                <div class="progress-line-fill" id="progress-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Paso 1: Información básica -->
+        <div class="form-step active" id="step1">
+            <div class="form-group">
+                <label for="name">¿Cómo te llamas?</label>
+                <input type="text" id="name" placeholder="Tu nombre o apodo" required>
+            </div>
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="nextStep(1)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- Paso 2: Experiencia -->
+        <div class="form-step" id="step2">
+            <div class="form-group">
+                <label for="experience">¿Qué experiencia tienes en poker?</label>
+                <select id="experience" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="Principiante">Estoy comenzando</option>
+                    <option value="Intermedio">Juego ocasionalmente</option>
+                    <option value="Avanzado">Juego regularmente</option>
+                </select>
+            </div>
+            <div class="btn-container">
+                <button class="btn btn-secondary" onclick="prevStep(2)">← Atrás</button>
+                <button class="btn btn-primary" onclick="nextStep(2)">Siguiente →</button>
+            </div>
+        </div>
+        
+        <!-- Paso 3: Preferencias de juego -->
+        <div class="form-step" id="step3">
+            <div class="form-group">
+                <label for="goals">¿Qué esperas lograr con este desafío?</label>
+                <textarea id="goals" rows="4" placeholder="Ej: Desarrollar disciplina, mejorar mi juego postflop, gestionar mejor mis emociones..." required></textarea>
+            </div>
+            <div class="btn-container">
+                <button class="btn btn-secondary" onclick="prevStep(3)">← Atrás</button>
+                <button class="btn btn-primary" onclick="submitForm()">Enviar Inscripción</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="bio.html">
+            <button>Inicio</button>
+        </a>
+        <a href="mtt2.html">
+            <button>Visor</button>
+        </a>
+        <a href="bonos.html">
+            <button>Bonos</button>
+        </a>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+        
+        function updateProgress() {
+            // Actualizar indicadores de pasos
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step${i}-indicator`);
+                if (i < currentStep) {
+                    indicator.classList.remove('active');
+                    indicator.classList.add('completed');
+                } else if (i === currentStep) {
+                    indicator.classList.add('active');
+                    indicator.classList.remove('completed');
+                } else {
+                    indicator.classList.remove('active', 'completed');
+                }
+            }
+            
+            // Actualizar barra de progreso
+            const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+        }
+        
+        function nextStep(step) {
+            // Validar campos requeridos antes de avanzar
+            if (step === 1 && !document.getElementById('name').value) {
+                alert('Por favor ingresa tu nombre');
+                return;
+            }
+            if (step === 2 && !document.getElementById('experience').value) {
+                alert('Por favor selecciona tu nivel de experiencia');
+                return;
+            }
+            
+            document.getElementById(`step${step}`).classList.remove('active');
+            currentStep = step + 1;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+        
+        function prevStep(step) {
+            document.getElementById(`step${step}`).classList.remove('active');
+            currentStep = step - 1;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgress();
+        }
+        
+        function submitForm() {
+            // Validar último paso
+            if (!document.getElementById('goals').value) {
+                alert('Por favor comparte qué esperas lograr');
+                return;
+            }
+            
+            // Recopilar todos los datos
+            const formData = {
+                name: document.getElementById('name').value,
+                experience: document.getElementById('experience').value,
+                goals: document.getElementById('goals').value
+            };
+            
+            // Crear mensaje para WhatsApp
+            const whatsappMessage = `¡Hola! Quiero unirme al Desafío de Poker:\n\n` +
+                                   `*Nombre:* ${formData.name}\n` +
+                                   `*Experiencia:* ${formData.experience}\n` +
+                                   `*Mis objetivos:* ${formData.goals}\n\n` +
+                                   `Por favor dime cómo continuar con el proceso.`;
+            
+            // Codificar el mensaje para URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Redirigir a WhatsApp
+            window.open(`https://wa.me/5521959192541?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
