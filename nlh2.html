@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Equity de Póker</title>
+    <!-- Biblioteca poker-odds-calculator -->
+    <script src="https://cdn.jsdelivr.net/npm/poker-odds-calculator@2.1.0/dist/poker-odds.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #cartas-form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            height: 30px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        #loading {
+            display: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Equity de Póker</h1>
+    <form id="cartas-form">
+        <label for="carta1">Carta 1 (ej: Ah, Ks, Td):</label>
+        <input type="text" id="carta1" placeholder="Ej: Ah" required>
+
+        <label for="carta2">Carta 2:</label>
+        <input type="text" id="carta2" placeholder="Ej: Kd" required>
+
+        <label for="flop">Flop (opcional):</label>
+        <input type="text" id="flop" placeholder="Ej: Ts Jc Qh">
+
+        <button id="calcular">Calcular Equity</button>
+        <div id="loading">Calculando...</div>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('calcular').addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const carta1 = document.getElementById('carta1').value.trim();
+            const carta2 = document.getElementById('carta2').value.trim();
+            const flop = document.getElementById('flop').value.trim();
+            const resultadoDiv = document.getElementById('resultado');
+            const loadingDiv = document.getElementById('loading');
+
+            // Validación básica
+            if (!carta1 || !carta2) {
+                resultadoDiv.innerHTML = '<span class="error">⚠️ Ingresa ambas cartas</span>';
+                return;
+            }
+
+            loadingDiv.style.display = 'block';
+            resultadoDiv.innerHTML = '';
+
+            try {
+                const equity = await calcularEquity(carta1, carta2, flop);
+                resultadoDiv.innerHTML = `
+                    <strong>Equity:</strong> ${equity}%<br>
+                    <small>Contra un rango aleatorio (10,000 simulaciones)</small>
+                `;
+            } catch (error) {
+                resultadoDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+                console.error(error);
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        });
+
+        async function calcularEquity(carta1, carta2, flop = '') {
+            // Formatear las cartas comunitarias
+            const board = flop ? flop.split(/\s+/) : [];
+            
+            // Validar formato de cartas (ej: "Ah" o "TD")
+            const formatoCarta = /^[AKQJT98765432][hdcs]$/i;
+            if (!formatoCarta.test(carta1) throw new Error(`Formato inválido para Carta 1: ${carta1}`);
+            if (!formatoCarta.test(carta2)) throw new Error(`Formato inválido para Carta 2: ${carta2}`);
+            
+            // Configurar el cálculo
+            const playerHand = `${carta1.toUpperCase()} ${carta2.toUpperCase()}`;
+            const opponents = ['random']; // Rango aleatorio para el oponente
+            
+            // Ejecutar simulación
+            const result = await PokerOddsCalculator.calculate(
+                [playerHand, ...opponents],
+                board,
+                10000 // Número de simulaciones
+            );
+
+            // Obtener equity en porcentaje (nuestra mano es el primer jugador)
+            return result.getEquity(0).toFixed(1);
+        }
+    </script>
+</body>
+</html>
