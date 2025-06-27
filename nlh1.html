@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Equity de Póker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #cartas-form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 30px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/poker.js@latest/dist/poker.min.js"></script>
+</head>
+<body>
+    <h1>Calculadora de Equity de Póker</h1>
+    <form id="cartas-form">
+        <label for="carta1">Carta 1:</label>
+        <input type="text" id="carta1" placeholder="Ej: Ah">
+
+        <label for="carta2">Carta 2:</label>
+        <input type="text" id="carta2" placeholder="Ej: Kd">
+
+        <label for="flop">Flop:</label>
+        <input type="text" id="flop" placeholder="Ej: Ts Jc Qh">
+
+        <button id="calcular">Calcular Equity</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        const form = document.getElementById('cartas-form');
+        const carta1Input = document.getElementById('carta1');
+        const carta2Input = document.getElementById('carta2');
+        const flopInput = document.getElementById('flop');
+        const calcularButton = document.getElementById('calcular');
+        const resultadoDiv = document.getElementById('resultado');
+
+        calcularButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const carta1 = carta1Input.value.trim();
+            const carta2 = carta2Input.value.trim();
+            const flop = flopInput.value.trim();
+            const equity = calcularEquity(carta1, carta2, flop);
+            resultadoDiv.innerHTML = `La equity es: ${equity}%`;
+        });
+
+        function calcularEquity(carta1, carta2, flop) {
+            const hand = new Poker.Hand([carta1, carta2]);
+            const board = new Poker.Board([flop]);
+            const equity = Poker.Equity.calculate(hand, board);
+            return equity;
+        }
+    </script>
+</body>
+</html>
