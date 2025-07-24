@@ -1,0 +1,536 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor de Rangos Poker NLH</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-allin: #FF3860;
+      --color-raise: #485BFF;
+      --color-call: #FFB800;
+      --color-fold: #2D3748;
+      --color-otro: #9B5CFF;
+      --background-color: #f8fafc;
+      --controls-bg-color: #ffffff;
+      --text-color: #1e293b;
+      --button-bg-color: #e2e8f0;
+      --button-hover-bg-color: #cbd5e1;
+      --grid-border-color: #cbd5e1;
+    }
+
+    body.dark-mode {
+      --background-color: #1e293b;
+      --controls-bg-color: #334155;
+      --text-color: #f8fafc;
+      --button-bg-color: #475569;
+      --button-hover-bg-color: #64748b;
+      --grid-border-color: #475569;
+      --color-fold: #4a5568;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--background-color);
+      color: var(--text-color);
+      transition: background-color .3s, color .3s;
+    }
+
+    .hand-cell {
+      width: 1.7rem;
+      height: 1.7rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.2rem;
+      transition: all 0.1s;
+      cursor: pointer;
+    }
+
+    .hand-cell:hover {
+      transform: scale(1.15);
+      z-index: 2;
+      box-shadow: 0 0 6px rgba(0,0,0,0.4);
+    }
+
+    .allin { background: var(--color-allin); color: white; }
+    .raise { background: var(--color-raise); color: white; }
+    .call  { background: var(--color-call); color: var(--text-color); }
+    .fold  { background: var(--color-fold); color: #A0AEC0; }
+    .otro  { background: var(--color-otro); color: white; }
+
+    .mode-btn {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      min-width: 4rem;
+      background: var(--button-bg-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: background-color .2s;
+    }
+
+    .mode-btn:hover {
+      background: var(--button-hover-bg-color);
+    }
+
+    .stats-item {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .stats-badge {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      margin-right: 0.3rem;
+    }
+
+    .export-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+    }
+
+    #preview-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #image-preview {
+      max-width: 90%;
+      max-height: 90%;
+      border: 2px solid white;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .close-preview {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .share-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 800px;
+      background: var(--controls-bg-color);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,.1);
+      padding: 1.5rem;
+      margin: 1rem auto;
+      transition: background-color .3s;
+    }
+
+    .color-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .color-picker-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .color-picker-wrapper label {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-color);
+    }
+
+    .color-picker-wrapper input[type="color"] {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--grid-border-color);
+      border-radius: 0.375rem;
+      cursor: pointer;
+      background: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .hand-cell {
+        width: 1.5rem;
+        height: 1.5rem;
+        font-size: 0.5rem;
+      }
+
+      .mode-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+        min-width: 3.5rem;
+      }
+
+      .stats-item {
+        font-size: 0.7rem;
+        margin-right: 0.6rem;
+      }
+    }
+
+    .pulse {
+      animation: pulse 0.3s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+  </style>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          otro: '#9B5CFF',
+        },
+      },
+      gridTemplateColumns: {
+        13: 'repeat(13, minmax(0, 1fr))'
+      }
+    }
+  }
+</script>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+  <div class="app-container">
+    <header class="text-center mb-4">
+      <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Editor de Rangos Poker NLH</h1>
+      <p class="opacity-80">Crea y exporta tus estrategias preflop</p>
+    </header>
+
+    <div class="controls mb-4 p-3 rounded-lg bg-opacity-50">
+      <!-- Selector de colores personalizado -->
+      <div class="color-controls">
+        <div class="color-picker-wrapper">
+          <label for="colorPicker">Color Personalizado:</label>
+          <input type="color" id="colorPicker" value="#9B5CFF" />
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-2 mb-3">
+        <button class="mode-btn" data-mode="fold">Fold</button>
+        <button class="mode-btn" data-mode="call">Call</button>
+        <button class="mode-btn" data-mode="raise">Raise</button>
+        <button class="mode-btn" data-mode="allin">All-In</button>
+        <button class="mode-btn" data-mode="otro">Otro</button>
+        <button class="mode-btn" id="reset">Reset</button>
+        <button class="mode-btn export-btn" id="export-btn">Exportar PNG</button>
+        <button class="mode-btn" id="toggleDarkMode">Modo Oscuro</button>
+      </div>
+
+      <div class="flex justify-center flex-wrap mb-2">
+        <div class="stats-item">
+          <div class="stats-badge bg-gray-500"></div>
+          <span class="mr-1">Fold:</span>
+          <span class="font-bold" id="fold-percent">100%</span>
+        </div>
+        <div class="stats-item">
+          <div class="stats-badge bg-yellow-500"></div>
+          <span class="mr-1">Call:</span>
+          <span class="font-bold" id="call-percent">0%</span>
+        </div>
+        <div class="stats-item">
+          <div class="stats-badge bg-blue-500"></div>
+          <span class="mr-1">Raise:</span>
+          <span class="font-bold" id="raise-percent">0%</span>
+        </div>
+        <div class="stats-item">
+          <div class="stats-badge bg-red-500"></div>
+          <span class="mr-1">All-In:</span>
+          <span class="font-bold" id="allin-percent">0%</span>
+        </div>
+        <div class="stats-item">
+          <div class="stats-badge bg-[#9B5CFF]"></div>
+          <span class="mr-1">Otro:</span>
+          <span class="font-bold" id="otro-percent">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="grid-container" class="bg-gray-800 p-3 rounded-lg shadow-lg">
+      <div id="grid" class="grid grid-cols-13 gap-0.5 mb-3 mx-auto" style="width: fit-content;"></div>
+    </div>
+  </div>
+
+  <!-- Preview Modal -->
+  <div id="preview-container">
+    <span class="close-preview">&times;</span>
+    <img id="image-preview" alt="Previsualización de la matriz">
+    <div class="share-buttons">
+      <button class="share-btn bg-blue-500 hover:bg-blue-600" id="share-twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        </svg>
+        Twitter
+      </button>
+      <button class="share-btn bg-indigo-600 hover:bg-indigo-700" id="share-facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        </svg>
+        Facebook
+      </button>
+      <button class="share-btn bg-gray-700 hover:bg-gray-800" id="download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+          <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+        </svg>
+        Descargar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Configuración inicial
+    const grid = document.getElementById("grid");
+    const ranks = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
+    let currentMode = "raise";
+    let isMouseDown = false;
+    let exportedImage = null;
+    const colorPicker = document.getElementById("colorPicker");
+
+    const modeStyles = {
+      fold: "fold",
+      call: "call",
+      raise: "raise",
+      allin: "allin",
+      otro: "otro"
+    };
+
+    // Inicializar la cuadrícula 13x13
+    function initializeGrid() {
+      grid.innerHTML = "";
+      for (let i = 0; i < ranks.length; i++) {
+        for (let j = 0; j < ranks.length; j++) {
+          let hand = i === j ? ranks[i] + ranks[j]
+                   : i < j ? ranks[i] + ranks[j] + "o"
+                   : ranks[j] + ranks[i] + "s";
+
+          const div = document.createElement("div");
+          div.className = `hand-cell fold`;
+          div.textContent = hand;
+          div.dataset.hand = hand;
+          div.dataset.state = "fold";
+          div.dataset.row = i;
+          div.dataset.col = j;
+
+          if (i === j) div.classList.add("font-bold");
+          grid.appendChild(div);
+        }
+      }
+    }
+
+    // Actualizar estadísticas
+    function updateStats() {
+      const cells = document.querySelectorAll(".hand-cell");
+      const total = cells.length;
+      const folds = document.querySelectorAll('[data-state="fold"]').length;
+      const calls = document.querySelectorAll('[data-state="call"]').length;
+      const raises = document.querySelectorAll('[data-state="raise"]').length;
+      const allins = document.querySelectorAll('[data-state="allin"]').length;
+      const otros = document.querySelectorAll('[data-state="otro"]').length;
+
+      document.getElementById("fold-percent").textContent = Math.round((folds / total) * 100) + "%";
+      document.getElementById("call-percent").textContent = Math.round((calls / total) * 100) + "%";
+      document.getElementById("raise-percent").textContent = Math.round((raises / total) * 100) + "%";
+      document.getElementById("allin-percent").textContent = Math.round((allins / total) * 100) + "%";
+      document.getElementById("otro-percent").textContent = Math.round((otros / total) * 100) + "%";
+    }
+
+    // Cambiar estado de una celda
+    function setCellState(cell) {
+      cell.dataset.state = currentMode;
+      
+      // Si el modo es "otro", usamos el color personalizado
+      if (currentMode === "otro") {
+        cell.style.backgroundColor = colorPicker.value;
+        cell.style.color = getContrastColor(colorPicker.value);
+        cell.className = "hand-cell pulse";
+      } else {
+        cell.className = `hand-cell ${modeStyles[currentMode]} pulse`;
+      }
+      
+      if (cell.dataset.row === cell.dataset.col) cell.classList.add("font-bold");
+      setTimeout(() => cell.classList.remove("pulse"), 200);
+    }
+
+    // Función para determinar el color de texto contrastante
+    function getContrastColor(hexColor) {
+      // Convertir el color HEX a RGB
+      const r = parseInt(hexColor.substr(1, 2), 16);
+      const g = parseInt(hexColor.substr(3, 2), 16);
+      const b = parseInt(hexColor.substr(5, 2), 16);
+      
+      // Calcular el brillo (fórmula de luminosidad)
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+      
+      // Devolver blanco o negro según el brillo
+      return brightness > 128 ? '#1F2937' : 'white';
+    }
+
+    // Exportar a PNG
+    function exportToPNG() {
+      const gridContainer = document.getElementById("grid-container");
+      
+      // Ajustes temporales para la exportación
+      const originalBg = gridContainer.style.background;
+      gridContainer.style.background = "#1F2937"; // Fondo más oscuro para mejor contraste
+      
+      html2canvas(gridContainer, {
+        backgroundColor: null,
+        scale: 2, // Mayor resolución
+        logging: false,
+        allowTaint: true,
+        useCORS: true
+      }).then(canvas => {
+        gridContainer.style.background = originalBg;
+        exportedImage = canvas.toDataURL("image/png");
+        document.getElementById("image-preview").src = exportedImage;
+        document.getElementById("preview-container").style.display = "flex";
+      });
+    }
+
+    // Descargar imagen
+    function downloadImage() {
+      if (!exportedImage) return;
+      
+      const link = document.createElement("a");
+      link.download = `rango-poker-${new Date().toISOString().slice(0,10)}.png`;
+      link.href = exportedImage;
+      link.click();
+    }
+
+    // Compartir en Twitter
+    function shareTwitter() {
+      if (!exportedImage) return;
+      
+      const text = "Mi rango preflop para Texas Hold'em - Creado con Editor de Rangos Poker";
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+      window.open(url, "_blank");
+    }
+
+    // Compartir en Facebook
+    function shareFacebook() {
+      if (!exportedImage) return;
+      
+      const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
+      window.open(url, "_blank");
+    }
+
+    // Cerrar vista previa
+    function closePreview() {
+      document.getElementById("preview-container").style.display = "none";
+    }
+
+    // Alternar modo oscuro
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const btn = document.getElementById("toggleDarkMode");
+      btn.textContent = document.body.classList.contains("dark-mode") ? "Modo Claro" : "Modo Oscuro";
+      
+      // Actualizar colores personalizados
+      document.querySelectorAll('[data-state="otro"]').forEach(cell => {
+        cell.style.color = getContrastColor(cell.style.backgroundColor || colorPicker.value);
+      });
+    }
+
+    // Event Listeners
+    document.getElementById("export-btn").addEventListener("click", exportToPNG);
+    document.getElementById("download-btn").addEventListener("click", downloadImage);
+    document.getElementById("share-twitter").addEventListener("click", shareTwitter);
+    document.getElementById("share-facebook").addEventListener("click", shareFacebook);
+    document.querySelector(".close-preview").addEventListener("click", closePreview);
+    document.getElementById("toggleDarkMode").addEventListener("click", toggleDarkMode);
+
+    // Interacción con la cuadrícula
+    grid.addEventListener("mousedown", e => {
+      isMouseDown = true;
+      const cell = e.target.closest(".hand-cell");
+      if (cell) {
+        setCellState(cell);
+        updateStats();
+      }
+    });
+
+    grid.addEventListener("mouseover", e => {
+      if (!isMouseDown) return;
+      const cell = e.target.closest(".hand-cell");
+      if (cell) {
+        setCellState(cell);
+        updateStats();
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      isMouseDown = false;
+    });
+
+    // Botones de modo
+    document.querySelectorAll("[data-mode]").forEach(btn => {
+      btn.addEventListener("click", e => {
+        currentMode = e.currentTarget.dataset.mode;
+        document.querySelectorAll("[data-mode]").forEach(b => b.classList.remove("ring-2", "ring-white"));
+        e.currentTarget.classList.add("ring-2", "ring-white");
+      });
+    });
+
+    // Botón de reset
+    document.getElementById("reset").addEventListener("click", () => {
+      document.querySelectorAll(".hand-cell").forEach(cell => {
+        cell.dataset.state = "fold";
+        cell.className = "hand-cell fold";
+        cell.style.backgroundColor = "";
+        cell.style.color = "";
+        if (cell.dataset.row === cell.dataset.col) cell.classList.add("font-bold");
+      });
+      updateStats();
+    });
+
+    // Inicialización
+    initializeGrid();
+    updateStats();
+    document.querySelector("[data-mode='raise']").classList.add("ring-2", "ring-white");
+  </script>
+</body>
+</html>
