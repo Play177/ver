@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Pack Póker PRO MRR - Domina el Preflop y Gana Dinero Revendiendo</title>
+  <meta property="og:image" content="https://intellipoker.github.io/leopoker/777.jpeg"> 
+  <meta name="description" content="Curso Preflop + Herramientas Profesionales + Derechos de Reventa Ilimitados. ¡Conviértete en coach o revendedor!">
+  <style>
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #121212;
+      --accent: #FFD700;
+      --text-primary: #C0C0C0;
+      --text-secondary: #b0b0b0;
+      --card-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px 15px 90px;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 10px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .bloque {
+      margin-bottom: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .intro-text {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: var(--text-secondary);
+    }
+
+    .card {
+      background-color: var(--bg-secondary);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      box-shadow: var(--card-shadow);
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .content-item {
+      background-color: var(--bg-secondary);
+      border-left: 4px solid var(--accent);
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      gap: 15px;
+    }
+
+    .testimonial {
+      background-color: var(--bg-secondary);
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #2196F3;
+    }
+
+    .offer-box {
+      background-color: var(--bg-secondary);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .cta-button {
+      background: linear-gradient(to right, #FFD700, #FFA500);
+      color: #000;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin: 20px auto;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .cta-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .cta-note {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      color: var(--accent);
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .strike {
+      text-decoration: line-through;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    .footer-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--bg-primary);
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      padding: 12px 0;
+      backdrop-filter: blur(5px);
+    }
+
+    .footer-nav button {
+      background-color: var(--accent);
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .footer-nav button:hover {
+      background-color: #000;
+      color: var(--accent);
+      outline: 2px solid var(--accent);
+      transform: translateY(-2px);
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 30px 20px 100px;
+      }
+      
+      .bloque {
+        padding: 0 20px;
+      }
+      
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>   <style>
+    /* (Conserva todos los estilos anteriores) */
+    
+    /* Nuevos estilos para mayor impacto */
+    .hero-cta {
+      background: linear-gradient(135deg, rgba(10,10,10,0.9), rgba(30,30,30,0.7));
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 600px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-cta:after {
+      content: "⚡ OFERTA RELÁMPAGO ⚡";
+      position: absolute;
+      top: 10px;
+      right: -30px;
+      background: #FF0000;
+      color: white;
+      padding: 5px 40px;
+      transform: rotate(25deg);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(255,215,0,0.05);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-item:hover {
+      background: rgba(255,215,0,0.1);
+      transform: translateX(5px);
+    }
+    
+    .benefit-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    
+    .pain-point {
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 15px;
+    }
+    
+    .pain-point:before {
+      content: "💀";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO SECTION MEJORADA -->
+<div class="bloque">
+  <h1>🚀 <span>Domina el Poker Preflop</span> y Genera Ingresos con <span>Derechos de Reventa Ilimitados</span></h1>
+  
+  <div class="highlight-box" style="max-width: 800px;">
+    <p style="font-size: 1.2rem;"><strong>Accede al Pack Póker PRO y comienza a vender hoy mismo:</strong></p>
+    <p>La combinación definitiva para <strong>mejorar tu juego</strong> mientras construyes un <strong>negocio real</strong> en la industria del poker.</p>
+  </div>
+  
+  <div class="video-container">
+    <iframe src="URL_VIDEO"></iframe>
+  </div>
+  
+  <div class="cta-container">
+    <p class="price">$197 <span class="strike">$297</span></p>
+    <a href="#oferta" class="cta-button">¡QUIERO EL PACK COMPLETO!</a>
+    <p class="cta-note">📌 7 días de garantía | Acceso inmediato</p>
+  </div>
+</div>
+<!-- Justo después del primer CTA (botón "QUIERO EL PACK COMPLETO") -->
+<div class="bloque" style="margin-top: -20px;"> <!-- Ajuste de margen para proximidad -->
+  <div class="card" style="text-align: center; background: rgba(255,215,0,0.05); border: 1px dashed rgba(255,215,0,0.3);">
+    <p style="font-style: italic; margin-bottom: 5px;">"<strong>Vendí 2 packs el primer día</strong> compartiéndolo solo en mi grupo de WhatsApp de poker."</p>
+    <p style="margin: 0; font-size: 0.9rem;"><strong>— Carolina S.</strong> | Alumna y revendedora</p>
+    <img src="5-stars.png" alt="5 estrellas" style="width: 80px; margin-top: 8px;">
+  </div>
+</div>
+<!-- SECCIÓN PRODUCTOS DETALLADA -->
+<div class="bloque">
+  <h2>🧨 <span>Desglose Completo:</span> ¿Qué Incluye el Pack?</h2>
+  
+  <!-- Curso Preflop -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">🎓</div>
+      <h3>Curso Preflop <span style="color: var(--accent);">(MasterClass)</span></h3>
+    </div>
+    <p><strong>La estrategia base de los jugadores ganadores desde antes del flop.</strong> No es otro curso teórico interminable - es un sistema probado en mesas reales.</p>
+    <ul>
+      <li>✅ 5 módulos en video <strong>sin relleno</strong></li>
+      <li>✅ Enfoque práctico para aplicar <strong>desde el día 1</strong></li>
+      <li>✅ Ejemplos de manos reales con explicación <strong>paso a paso</strong></li>
+      <li>✅ Ajustes para cash games, MTTs y SNGs</li>
+    </ul>
+    <p style="font-style: italic;">"El preflop es como los cimientos de un edificio: si es débil, todo se derrumba."</p>
+  </div>
+
+
+<!-- SECCIÓN DE BENEFICIOS CON ÍCONOS -->
+<div class="bloque">
+  <h2>🎯 Beneficios de Obtener Este Pack</h2>
+  
+  <div class="benefit-item">
+    <div class="benefit-icon">💰</div>
+    <div>
+      <strong>Gana Dinero Revendiendo</strong><br>
+      Obtén derechos ilimitados de reventa para que puedas generar ingresos desde el primer día.
+    </div>
+  </div>
+
+  <div class="benefit-item">
+    <div class="benefit-icon">📚</div>
+    <div>
+      <strong>Capacitación Profesional</strong><br>
+      Aprende estrategias preflop utilizadas por jugadores ganadores de torneos Spin & Go y MTT.
+    </div>
+  </div>
+
+  <div class="benefit-item">
+    <div class="benefit-icon">🛠️</div>
+    <div>
+      <strong>Herramientas de Alto Nivel</strong><br>
+      Incluye visores de rangos, scripts personalizados y recursos avanzados para coaching o juego.
+    </div>
+  </div>
+
+  <div class="benefit-item">
+    <div class="benefit-icon">⚡</div>
+    <div>
+      <strong>Acceso Inmediato y Garantía</strong><br>
+      Recibe todo al instante y accede con total confianza gracias a nuestra garantía de 7 días.
+    </div>
+  </div>
+</div>
+
+  
+  <!-- Visor de Rangos -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">⚡</div>
+      <h3>Visor de Rangos <span style="color: var(--accent);">(El Más Rápido de la Industria)</span></h3>
+    </div>
+    <p><strong>Olvídate de software pesado y esperas interminables.</strong> Nuestro visor te muestra el rango óptimo en menos de 1 segundo.</p>
+    <ul>
+      <li>✅ 3x más rápido que Holdem Manager</li>
+      <li>✅ Ideal para estudiar, calentar o revisar sesiones</li>
+      <li>✅ Compatible con Windows, Mac y móviles</li>
+      <li>✅ Actualizaciones gratuitas por 1 año</li>
+    </ul>
+    <img src="gif-visor.gif" alt="Demo visor" style="max-width: 100%; border-radius: 8px; margin-top: 10px;">
+  </div>
+  
+  <!-- Editor de Rangos -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">🛠️</div>
+      <h3>Editor de Rangos <span style="color: var(--accent);">(Profesional)</span></h3>
+    </div>
+    <p><strong>Crea y ajusta estrategias como un coach profesional.</strong> No más copiar y pegar rangos de otros jugadores.</p>
+    <ul>
+      <li>✅ Modifica rangos base con <strong>arrastrar y soltar</strong></li>
+      <li>✅ Crea perfiles para diferentes tipos de mesas</li>
+      <li>✅ Exporta/importa configuraciones</li>
+      <li>✅ Ideal para jugadores avanzados y coaches</li>
+    </ul>
+  </div>
+  
+  <!-- Comunidad VIP -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">💬</div>
+      <h3>Comunidad VIP <span style="color: var(--accent);">"Meus 10"</span></h3>
+    </div>
+    <p><strong>Acceso exclusivo a un grupo de jugadores serios</strong> donde el 90% tiene ROI positivo.</p>
+    <ul>
+      <li>✅ Networking con jugadores ganadores</li>
+      <li>✅ Análisis de manos semanales</li>
+      <li>✅ Feedback personalizado</li>
+      <li>✅ Sesiones de preguntas y respuestas</li>
+    </ul>
+    <p><strong>Bonus:</strong> Acceso a nuestra biblioteca privada con +50 análisis de manos históricas.</p>
+  </div>
+  
+  <!-- Página Web -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">🌐</div>
+      <h3>Tu Propia <span style="color: var(--accent);">Página Web</span></h3>
+    </div>
+    <p><strong>Una réplica de esta misma web lista para revender.</strong> No necesitas conocimientos técnicos.</p>
+    <ul>
+      <li>✅ 100% personalizable (cambia textos, colores, imágenes)</li>
+      <li>✅ Optimizada para conversiones</li>
+      <li>✅ Diseño responsive (funciona en móviles)</li>
+      <li>✅ Instalación en 1 clic</li>
+    </ul>
+  </div>
+  
+  <!-- Podcast Bonus -->
+  <div class="product-detail">
+    <div class="product-header">
+      <div class="product-icon">🎧</div>
+      <h3>BONO: Podcast <span style="color: var(--accent);">"Poker Sin Filtro"</span></h3>
+    </div>
+    <p><strong>Contenido exclusivo que no encontrarás en ningún otro lugar:</strong></p>
+    <ul>
+      <li>🔴 <strong>3 secretos de gestión de banca</strong> que nadie te cuenta</li>
+      <li>🔴 <strong>3 verdades incómodas</strong> del poker online en 2024</li>
+      <li>🔴 <strong>3 oportunidades ocultas</strong> que siguen funcionando hoy</li>
+    </ul>
+    <p style="font-style: italic;">"Este podcast solo está disponible para compradores del Pack PRO."</p>
+  </div>
+</div>
+
+<!-- SECCIÓN COMPARATIVA DE PRECIOS - AGREGAR ANTES DE LICENCIA MRR -->
+<div class="bloque">
+  <h2>💎 <span>¿Por qué este Pack es</span> una Inversión Inteligente?</h2>
+  
+  <div class="card" style="background: rgba(255, 215, 0, 0.05); border: 1px solid rgba(255, 215, 0, 0.3);">
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+      <!-- Encabezado -->
+      <tr style="border-bottom: 2px solid var(--accent);">
+        <th style="text-align: left; padding: 12px 8px; font-size: 1.1rem;">Producto</th>
+        <th style="text-align: right; padding: 12px 8px; font-size: 1.1rem;">Valor Real</th>
+      </tr>
+      <!-- Items -->
+      <tr style="border-bottom: 1px solid rgba(255, 215, 0, 0.1);">
+        <td style="padding: 12px 8px; font-weight: bold;">🎓 Curso Preflop PRO</td>
+        <td style="text-align: right; padding: 12px 8px;">$97 USD</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 215, 0, 0.1);">
+        <td style="padding: 12px 8px; font-weight: bold;">⚡ Visor de Rangos (1 año de updates)</td>
+        <td style="text-align: right; padding: 12px 8px;">$147 USD</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 215, 0, 0.1);">
+        <td style="padding: 12px 8px; font-weight: bold;">🛠️ Editor de Rangos Avanzado</td>
+        <td style="text-align: right; padding: 12px 8px;">$67 USD</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 215, 0, 0.1);">
+        <td style="padding: 12px 8px; font-weight: bold;">🌐 Página Web para Reventa</td>
+        <td style="text-align: right; padding: 12px 8px;">$97 USD</td>
+      </tr>
+      <tr style="border-bottom: 1px solid rgba(255, 215, 0, 0.1);">
+        <td style="padding: 12px 8px; font-weight: bold;">💬 Comunidad VIP "Meus 10"</td>
+        <td style="text-align: right; padding: 12px 8px;">$47 USD/mes</td>
+      </tr>
+      <!-- Total -->
+      <tr style="background: rgba(255, 215, 0, 0.1); font-weight: bold;">
+        <td style="padding: 15px 8px; font-size: 1.1rem;">VALOR TOTAL</td>
+        <td style="text-align: right; padding: 15px 8px; font-size: 1.1rem; color: var(--accent);">$455 USD</td>
+      </tr>
+      <!-- Tu Precio -->
+      <tr style="border-top: 2px dashed var(--accent);">
+        <td style="padding: 15px 8px; font-size: 1.2rem; font-weight: bold;">TU PRECIO HOY</td>
+        <td style="text-align: right; padding: 15px 8px;">
+          <span style="font-size: 1.5rem; color: var(--accent); font-weight: bold;">$197 USD</span><br>
+          <span style="text-decoration: line-through; color: var(--text-secondary); font-size: 0.9rem;">$297 USD</span>
+        </td>
+      </tr>
+    </table>
+    
+    <!-- Nota de Ahorro -->
+    <div style="text-align: center; margin-top: 20px; padding: 10px; background: rgba(0, 255, 0, 0.1); border-radius: 6px;">
+      <p style="margin: 0; font-weight: bold; color: #00FF00;">¡Estás ahorrando <span style="font-size: 1.2rem;">$258 USD</span>!</p>
+    </div>
+  </div>
+  
+  <!-- CTA Intermedio -->
+  <div class="cta-container">
+    <a href="#oferta" class="cta-button" style="font-size: 1.1rem;">🚀 QUIERO APROVECHAR ESTE AHORRO</a>
+    <p class="cta-note">⏳ Solo disponible hasta <span style="font-weight: bold;">[fecha]</span></p>
+  </div>
+</div>
+
+<!-- SECCIÓN LICENCIA DETALLADA -->
+<div class="bloque" id="oferta">
+  <h2>💸 <span>Licencia MRR:</span> ¿Qué Podés Hacer Exactamente?</h2>
+  
+  <div class="license-benefits">
+    <div class="license-item">
+      <div style="font-size: 2rem;">💰</div>
+      <p><strong>Revender ilimitadamente</strong> este mismo pack</p>
+    </div>
+    <div class="license-item">
+      <div style="font-size: 2rem;">💯</div>
+      <p><strong>Quedarte con el 100%</strong> de las ganancias</p>
+    </div>
+    <div class="license-item">
+      <div style="font-size: 2rem;">🛒</div>
+      <p><strong>Vender al precio</strong> que consideres justo</p>
+    </div>
+    <div class="license-item">
+      <div style="font-size: 2rem;">🌎</div>
+      <p><strong>Distribuir internacionalmente</strong> sin restricciones</p>
+    </div>
+  </div>
+  
+  <div class="card" style="border-left-color: var(--accent);">
+    <h3 style="text-align: center;">Ejemplo Real de Ingresos:</h3>
+    <p style="text-align: center;">Si vendes solo <strong>5 packs a $197 cada uno</strong>:</p>
+    <p style="font-size: 1.5rem; color: var(--accent); text-align: center; font-weight: bold;">$985 en tu bolsillo (sin comisiones)</p>
+    <p style="text-align: center;">¡Y puedes venderlos <strong>las veces que quieras!</strong></p>
+  </div>
+</div>
+
+<!-- Dentro de la sección "Licencia MRR" (después del ejemplo de ingresos) -->
+<div class="card" style="margin-top: 25px; background: rgba(0,255,0,0.03); border-left: 4px solid #4CAF50;">
+  <div style="display: flex; align-items: start; gap: 15px;">
+    <div style="font-size: 2rem;">👨‍🏫</div>
+    <div>
+      <p style="margin: 0 0 10px 0; font-weight: bold; color: #FFD700;">Nicolás C. (Coach de Spins)</p>
+      <p style="font-style: italic; margin: 0;">"Revendí <strong>15 packs en 3 semanas</strong> a mis alumnos. La página web incluida me ahorró horas de trabajo y ahora es un ingreso recurrente."</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- SECCIÓN FAQ MEJORADA -->
+<div class="bloque">
+  <h2>❓ <span>Preguntas Frecuentes</span></h2>
+  
+  <div class="card">
+    <h3>¿Necesito experiencia previa para usarlo?</h3>
+    <p><strong>No.</strong> El pack está diseñado para ser útil tanto para principiantes como para jugadores avanzados:</p>
+    <ul>
+      <li>Principiantes: Sigue el sistema paso a paso</li>
+      <li>Avanzados: Personaliza los rangos base</li>
+      <li>Coaches: Úsalo como herramienta de enseñanza</li>
+    </ul>
+  </div>
+  
+  <div class="card">
+    <h3>¿Puedo revender el contenido en mi país?</h3>
+    <p><strong>Sí.</strong> La licencia MRR te da derechos de reventa internacionales sin restricciones geográficas.</p>
+  </div>
+  
+  <div class="card">
+    <h3>¿Recibo soporte si tengo dudas?</h3>
+    <p><strong>Sí.</strong> Al comprar accedes al grupo privado "Meus 10" donde podrás:</p>
+    <ul>
+      <li>Resolver dudas técnicas</li>
+      <li>Recibir consejos de marketing</li>
+      <li>Acceder a webinars exclusivos</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CTA FINAL CON URGENCIA -->
+<div class="bloque">
+  <div class="highlight-box" style="background: linear-gradient(135deg, #8B0000, #450000); color: white;">
+    <h2 style="color: white; text-align: center;">⚠️ ATENCIÓN: Esto No Es Un Curso Cualquiera</h2>
+    <p style="text-align: center;">Es tu <strong>oportunidad de mejorar tu juego</strong> mientras construyes un <strong>negocio real</strong> en la industria del poker.</p>
+    
+    <div style="margin: 25px 0; text-align: center;">
+      <p class="price" style="color: white;">$197 <span class="strike">$297</span></p>
+      <p style="font-size: 0.9rem;">(Precio de lanzamiento - Aumenta pronto)</p>
+    </div>
+    
+    <a href="#checkout" class="cta-button" style="display: block; width: 80%; margin: 0 auto; font-size: 1.2rem;">¡QUIERO EL PACK PRO AHORA!</a>
+    <p style="text-align: center; margin-top: 15px;">⏳ Oferta finaliza en: <span id="countdown" style="font-weight: bold;">23:59:59</span></p>
+  </div>
+</div>
+<div class="footer-nav">
+  <a href="bio.html">
+    <button>Inicio</button>
+  </a>
+  <a href="index.html">
+    <button>Visor</button>
+  </a>
+  <a href="desafio18.html">
+    <button>Desafio!</button>
+  </a>
+</div>
+</body>
+</html>
