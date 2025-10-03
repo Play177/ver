@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visor de Tesis</title>
+
+  <!-- PDF.js (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <style>
+    /* Estilos básicos para integrar con tu tema */
+    .pdf-viewer { background:#fff; border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+    .pdf-toolbar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
+    .pdf-toolbar button, .pdf-toolbar select, .pdf-toolbar input[type="number"], .pdf-toolbar a {
+      padding:8px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); background:#fafafa; cursor:pointer; font-size:0.95rem;
+    }
+    .pdf-toolbar .small { padding:6px 10px; font-size:0.9rem; }
+    #pdf-container { width:100%; overflow:auto; text-align:center; }
+    #pdf-render { display:block; margin:0 auto; max-width:100%; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+    /* Responsive */
+    @media (max-width:600px) {
+      .pdf-toolbar { justify-content: center; }
+      .pdf-toolbar button, .pdf-toolbar a { flex: 1 1 45%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="max-width:1000px;margin:2rem auto;padding:0 1rem;">
+    <h2 style="color:#2c5fa5;margin-bottom:0.75rem;">Lector web — Tesis</h2>
+
+    <div class="pdf-viewer" aria-label="Lector de PDF">
+      <div class="pdf-toolbar" role="toolbar" aria-label="Controles del visor">
+        <button id="prev" class="small" aria-label="Página anterior">◀</button>
+        <button id="next" class="small" aria-label="Página siguiente">▶</button>
+
+        <label for="page-num" style="margin-left:6px;">Página</label>
+        <input id="page-num" type="number" min="1" value="1" style="width:70px;" />
+
+        <span id="page-count">/ 0</span>
+
+        <label for="zoom" style="margin-left:12px;">Zoom</label>
+        <select id="zoom" aria-label="Zoom">
+          <option value="0.8">80%</option>
+          <option value="1" selected>100%</option>
+          <option value="1.25">125%</option>
+          <option value="1.5">150%</option>
+          <option value="2">200%</option>
+        </select>
+
+        <button id="open" title="Abrir en nueva pestaña">Abrir</button>
+        <a id="download" href="tesis.pdf" download class="small" title="Descargar PDF">Descargar</a>
+      </div>
+
+      <div id="pdf-container" style="position:relative;">
+        <canvas id="pdf-render" role="img" aria-label="Página del documento"></canvas>
+      </div>
+      <noscript style="color:#b00;margin-top:8px;">Activa JavaScript para leer en el visor o <a href="tesis.pdf">descargar el PDF</a>.</noscript>
+    </div>
+  </div>
+
+  <script>
+    // URL del PDF (ajusta si tu PDF está en otra ruta)
+    const url = 'tesis.pdf';
+
+    // Indica la ruta del worker (usa la versión del CDN)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
+    let pdfDoc = null,
+        pageNum = 1,
+        scaleMultiplier = 1,    // factor de zoom (1 = 100%)
+        pageRendering = false,
+        pageNumPending = null;
+
+    const canvas = document.getElementById('pdf-render');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('pdf-container');
+
+    // Render de página (ajusta escala para adaptar al ancho del contenedor)
+    function renderPage(num) {
+      pageRendering = true;
+
+      pdfDoc.getPage(num).then(page => {
+        // viewport base con scale=1
+        const baseViewport = page.getViewport({ scale: 1 });
+        // calcular escala para ajustar al ancho del contenedor
+        const containerWidth = Math.max(300, container.clientWidth - 20); // margen seguro
+        const fitScale = (containerWidth / baseViewport.width) * scaleMultiplier;
+
+        const viewport = page.getViewport({ scale: fitScale });
+
+        // ajustar canvas al tamaño real de render
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.style.width = '100%'; // responsivo visual
+        canvas.style.height = 'auto';
+
+        // renderizar en canvas
+        const renderContext = { canvasContext: ctx, viewport: viewport };
+        const renderTask = page.render(renderContext);
+
+        // cuando termina
+        renderTask.promise.then(() => {
+          pageRendering = false;
+          document.getElementById('page-num').value = num;
+          document.getElementById('page-count').textContent = '/ ' + pdfDoc.numPages;
+          if (pageNumPending !== null) {
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+    }
+
+    // si se solicita renderizar mientras otra está en cola
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
+    }
+
+    // funciones de navegación
+    function showPrevPage() {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    }
+    function showNextPage() {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
+
+    // carga del documento
+    pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+      pdfDoc = pdfDoc_;
+      document.getElementById('page-count').textContent = '/ ' + pdfDoc.numPages;
+      // render primera página
+      renderPage(pageNum);
+    }).catch(err => {
+      console.error('Error cargando PDF:', err);
+      const viewer = document.querySelector('.pdf-viewer');
+      viewer.innerHTML = '<p style="color:#b00;">No se pudo cargar el PDF. Comprueba la ruta o las cabeceras CORS. <a href="' + url + '">Descargar</a></p>';
+    });
+
+    // eventos controles
+    document.getElementById('prev').addEventListener('click', showPrevPage);
+    document.getElementById('next').addEventListener('click', showNextPage);
+
+    document.getElementById('page-num').addEventListener('change', (e) => {
+      let desired = parseInt(e.target.value, 10);
+      if (isNaN(desired)) return;
+      if (desired < 1) desired = 1;
+      if (desired > pdfDoc.numPages) desired = pdfDoc.numPages;
+      pageNum = desired;
+      queueRenderPage(pageNum);
+    });
+
+    document.getElementById('zoom').addEventListener('change', (e) => {
+      scaleMultiplier = parseFloat(e.target.value) || 1;
+      queueRenderPage(pageNum);
+    });
+
+    // abrir en nueva pestaña
+    document.getElementById('open').addEventListener('click', () => {
+      window.open(url, '_blank');
+    });
+
+    // adaptar al redimensionar (debounce simple)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        queueRenderPage(pageNum);
+      }, 150);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,801 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesis: Mecánica Corporal en Enfermería | Lic. en Enfermería</title>
+    <style>
+        :root {
+            --primary: #2c5fa5;
+            --secondary: #4caf50;
+            --accent: #ff6b35;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), #1a3a7a);
+            color: white;
+            padding: 6rem 0 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .author {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .date {
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            opacity: 0.8;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        
+        /* Sections */
+        section {
+            padding: clamp(3rem, 8vw, 5rem) 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(2rem, 6vw, 3rem);
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+        }
+        
+        /* Introduction */
+        .intro-text {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+        
+        .highlight {
+            background-color: rgba(44, 95, 165, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: clamp(1rem, 3vw, 1.25rem);
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Objectives */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2rem);
+        }
+        
+        .objective-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: clamp(1.25rem, 3vw, 1.5rem);
+            text-align: center;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .objective-icon {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Methodology */
+        .methodology-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(1.5rem, 4vw, 2rem);
+        }
+        
+        .methodology-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: clamp(1.25rem, 3vw, 1.5rem);
+        }
+        
+        .methodology-item h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+        
+        .methodology-item h3 i {
+            margin-right: 0.75rem;
+        }
+        
+        /* Results */
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(1rem, 3vw, 1.5rem);
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: clamp(1.25rem, 3vw, 1.5rem);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .result-percentage {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-label {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: var(--dark);
+        }
+        
+        /* Conclusion */
+        .conclusion-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .conclusion-text {
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .call-to-action {
+            background: linear-gradient(135deg, var(--primary), #1a3a7a);
+            color: white;
+            padding: clamp(2rem, 5vw, 2.5rem);
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+        
+        .call-to-action h3 {
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 1.25rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 1.75rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .btn:hover {
+            background-color: #e55a2b;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: clamp(3rem, 8vw, 4rem) 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-section h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 1.25rem;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header {
+                padding: 5rem 0 2.5rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+            }
+            
+            .highlight {
+                margin: 1.25rem 0;
+            }
+            
+            .intro-text, .conclusion-text {
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                padding: 4rem 0 2rem;
+            }
+            
+            section {
+                padding: 2.5rem 0;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .card, .objective-card, .methodology-item, .result-item {
+                padding: 1.25rem;
+            }
+            
+            .call-to-action {
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .objectives-grid, .methodology-content, .results-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card, .objective-card, .methodology-item, .result-item {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <h1>Mecánica Corporal en el Personal de Enfermería</h1>
+            <p class="subtitle">Nivel de capacitación y aplicabilidad en el servicio de internación Clínica Quirúrgica para adultos</p>
+            <p class="author">Licenciada en Enfermería</p>
+            <p class="date">Hospital Dr. Natalio Burd de Centenario | 03-07 de enero 2022</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">TESIS MC</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#introduccion">Introducción</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#metodologia">Metodología</a></li>
+                <li><a href="#resultados">Resultados</a></li>
+                <li><a href="#conclusion">Conclusión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Introducción -->
+    <section id="introduccion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Introducción</h2>
+            </div>
+            <div class="card">
+                <p class="intro-text">Esta investigación se realiza teniendo en cuenta cómo muchas veces el personal de enfermería sufre lesiones ergonómicas. La pregunta central de este trabajo es: <strong>¿cuál es el nivel de capacitación y aplicabilidad de la mecánica corporal que posee el personal de enfermería en el servicio de internación Clínica Quirúrgica para adultos del Hospital Dr. Natalio Burd de Centenario en un periodo que va del 03 al 07 de enero del 2022?</strong></p>
+                
+                <div class="highlight">
+                    Siendo el objeto fundamental de enfermería el "cuidado" del individuo, familia, comunidad, población; así el adquirir conocimiento y capacitarse podrá disminuir y prevenir lesiones musculo-esqueléticas.
+                </div>
+                
+                <p class="intro-text">El estudio se enfoca en determinar el nivel de conocimiento y aplicación de la Mecánica Corporal (MC) como herramienta fundamental para prevenir lesiones laborales en el personal de enfermería, contribuyendo así a mejorar tanto la calidad del cuidado como las condiciones laborales del profesional.</p>
+            </div>
+        </div>
+    </section>
+
+<!-- Objetivos -->
+<section id="objetivos">
+    <div class="container">
+        <div class="section-title">
+            <h2>Objetivos</h2>
+        </div>
+        <div class="objectives-grid">
+            <div class="objective-card">
+                <div class="objective-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Objetivo General</h3>
+                <p>Determinar el nivel de conocimiento y aplicación de la mecánica corporal en el personal de enfermería que trabaja en internación de Clínica Quirúrgica del Hospital Dr. Natalio Burd de Centenario, durante el 03-07 de enero 2022.</p>
+            </div>
+            
+            <div class="objective-card">
+                <div class="objective-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Objetivo Específico 1</h3>
+                <p>Identificar el nivel de aplicación de la mecánica corporal en el personal de enfermería del sector de Clínica Quirúrgica para adultos.</p>
+            </div>
+            
+            <div class="objective-card">
+                <div class="objective-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Objetivo Específico 2</h3>
+                <p>Indagar sobre el concepto de mecánica corporal que posee el personal de enfermería.</p>
+            </div>
+            
+            <div class="objective-card">
+                <div class="objective-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Objetivo Específico 3</h3>
+                <p>Averiguar el conocimiento sobre los principios de la mecánica corporal.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Metodología -->
+<section id="metodologia">
+    <div class="container">
+        <div class="section-title">
+            <h2>Metodología</h2>
+        </div>
+        <div class="methodology-content">
+            <div class="methodology-item">
+                <h3><i class="fas fa-flask"></i> Diseño del Estudio</h3>
+                <p>Investigación <strong>cuantitativa, descriptiva</strong> y de <strong>corte transversal</strong>. Enfoque no experimental observando los fenómenos en su contexto natural para analizar la relación entre conocimiento y aplicación de la mecánica corporal.</p>
+            </div>
+            
+            <div class="methodology-item">
+                <h3><i class="fas fa-users"></i> Población y Muestra</h3>
+                <p><strong>Población:</strong> 24 enfermeros del sector de Clínica Quirúrgica para adultos.<br>
+                   <strong>Muestra:</strong> 11 enfermeros que participaron voluntariamente durante el 03-07 de enero de 2022.</p>
+            </div>
+            
+            <div class="methodology-item">
+                <h3><i class="fas fa-clipboard-list"></i> Instrumentos</h3>
+                <p><strong>Encuesta estructurada:</strong> 11 preguntas cerradas sobre conocimiento de MC.<br>
+                   <strong>Guía de observación:</strong> 15 ítems para evaluar aplicación práctica de MC.</p>
+            </div>
+            
+            <div class="methodology-item">
+                <h3><i class="fas fa-chart-bar"></i> Variables</h3>
+                <p><strong>Variable principal:</strong> Nivel de conocimiento vs aplicación de MC.<br>
+                   <strong>Dimensiones:</strong> Concepto, principios, equilibrio corporal, movimientos, alineación, técnicas de levantamiento.</p>
+            </div>
+            
+            <div class="methodology-item">
+                <h3><i class="fas fa-handshake"></i> Aspectos Éticos</h3>
+                <p>Consentimiento informado, confidencialidad, anonimato y respeto por la autonomía. Los participantes firmaron su aceptación voluntaria al proyecto.</p>
+            </div>
+            
+            <div class="methodology-item">
+                <h3><i class="fas fa-table"></i> Análisis de Datos</h3>
+                <p>Datos organizados en tablas de frecuencia y porcentajes. Análisis comparativo entre conocimiento teórico y aplicación práctica de la mecánica corporal.</p>
+            </div>
+        </div>
+        
+        <!-- Resumen de resultados principales -->
+        <div class="card" style="margin-top: 2rem; background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+            <h3 style="text-align: center; color: var(--primary); margin-bottom: 1.5rem;">Hallazgos Principales</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">100%</div>
+                    <div style="font-size: 0.9rem;">Conoce el concepto de MC</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">61%</div>
+                    <div style="font-size: 0.9rem;">Aplica la MC en la práctica</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">72%</div>
+                    <div style="font-size: 0.9rem;">Aplica principio de levantamiento</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">54%</div>
+                    <div style="font-size: 0.9rem;">Aplica principios de girar/pivotear</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Resultados -->
+    <section id="resultados">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resultados</h2>
+            </div>
+            <div class="results-container">
+                <div class="result-item">
+                    <div class="result-percentage">100%</div>
+                    <div class="result-label">Conocimiento del concepto de MC</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-percentage">54%</div>
+                    <div class="result-label">Aplicación de principios de girar, pivotear, tirar y empujar</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-percentage">72%</div>
+                    <div class="result-label">Aplicación del principio de levantamiento</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-percentage">63%</div>
+                    <div class="result-label">Conocimiento y aplicación del equilibrio corporal</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-percentage">90%</div>
+                    <div class="result-label">Realización de movimientos corporales adecuados</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-percentage">63%</div>
+                    <div class="result-label">Utilización de la alineación corporal</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusión -->
+    <section id="conclusion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Conclusión</h2>
+            </div>
+            <div class="conclusion-content">
+                <div class="card">
+                    <p class="conclusion-text">Se puede concluir que existe una <strong>fisura entre el nivel de conocimiento y la aplicación de la Mecánica Corporal</strong>, ya que no hay correlación entre ambas variables. A pesar de que el 100% del personal conoce el concepto de MC, su aplicación en la práctica diaria es irregular, variando entre el 54% y 90% según el principio específico.</p>
+                    
+                    <p class="conclusion-text">Estos resultados destacan la necesidad de implementar <strong>estrategias de capacitación continua</strong> y <strong>protocolos de aplicación práctica</strong> que permitan cerrar esta brecha entre el conocimiento teórico y la aplicación en el entorno laboral, contribuyendo así a la prevención de lesiones ergonómicas en el personal de enfermería.</p>
+                </div>
+                
+                <div class="call-to-action">
+    <h3>¿Eres un nuevo graduado en Enfermería u otra carrera de la salud?</h3>
+    <p>Tu tesis no debería quedar guardada en un cajón 📚. 
+    Aquí puedes publicarla online para que otros estudiantes, profesionales e investigadores se inspiren, aprendan y continúen construyendo conocimiento.</p>
+    
+    <div style="margin-top: 1.5rem;">
+        <a href="viewer.html" class="btn" style="margin-right: 1rem;">📥 Descargar esta Tesis</a>
+        <a href="publicar.html" class="btn" style="background-color: var(--secondary);">🚀 Publica tu Tesis</a>
+    </div>
+</div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre la Investigación</h3>
+                    <p>Estudio sobre la aplicación de la Mecánica Corporal en el personal de enfermería del Hospital Dr. Natalio Burd de Centenario.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#introduccion">Introducción</a></li>
+                        <li><a href="#objetivos">Objetivos</a></li>
+                        <li><a href="#metodologia">Metodología</a></li>
+                        <li><a href="#resultados">Resultados</a></li>
+                        <li><a href="#conclusion">Conclusión</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> lic.enfermeria@example.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Hospital Dr. Natalio Burd, Centenario</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Tesis de Licenciatura en Enfermería. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add animation to cards when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards for animation
+        document.querySelectorAll('.card, .objective-card, .methodology-item, .result-item').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
